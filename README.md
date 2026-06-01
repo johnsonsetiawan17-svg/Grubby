@@ -19,7 +19,7 @@ pkg update && pkg upgrade -y
 pkg install git python -y
 
 # Clone the repository
-git clone [https://github.com/johnsonsetiawan17-svg/Grubby](https://github.com/johnsonsetiawan17-svg/Grubby)
+git clone https://github.com/johnsonsetiawan17-svg/Grubby
 
 # Enter the folder
 cd Grubby
