@@ -1,57 +1,62 @@
 import os
 import sys
 import time
+import random
 
 def clear(): os.system('clear')
 
 def help_menu():
     print("--- Grubby Commands ---")
-    print(".help   .exit   .clear  .hello  .date   .ping   .info   .sys    .whoami")
-    print(".ls     .pwd    .banner .slap   .joke   .sleep  .count  .cowsay .sysinfo")
-    print(".ip     .time   .color  .love   .bye    .calc   .hack   .dev    .wait")
-    print(".echo   .host   .id     .shell  .os     .up     .random .start")
+    commands = [
+        ".help   - Show this menu",
+        ".exit   - Close Grubby",
+        ".clear  - Clear terminal",
+        ".hello  - Greeting",
+        ".date   - Show date",
+        ".time   - Show time",
+        ".calc   - Simple math",
+        ".cowsay - Cow says something",
+        ".joke   - Random joke",
+        ".ip     - Show network info",
+        ".sys    - System info",
+        ".whoami - Current user",
+        ".ls     - List files",
+        ".pwd    - Print working dir",
+        ".slap   - Fun command",
+        ".hack   - Fake hack",
+        ".random - Random number"
+    ]
+    for cmd in commands:
+        print(cmd)
 
 def main():
     clear()
-    print("Grubby Terminal Tool Loaded. Type .help for commands.")
+    print("Grubby Terminal v1.0 | Type .help for a list of commands.")
     while True:
-        cmd = input("Grubby> ").strip().lower()
+        user_input = input("Grubby> ").strip()
+        if not user_input: continue
         
+        parts = user_input.split(" ", 1)
+        cmd = parts[0].lower()
+        args = parts[1] if len(parts) > 1 else ""
+
         if cmd == ".help": help_menu()
-        elif cmd == ".exit": sys.exit()
+        elif cmd == ".exit": break
         elif cmd == ".clear": clear()
-        elif cmd == ".hello": print("Hello there, human!")
+        elif cmd == ".hello": print("Hello! I am Grubby.")
         elif cmd == ".date": os.system("date")
-        elif cmd == ".ping": print("Pong!")
-        elif cmd == ".info": print("Grubby v1.0 - Built for Termux")
+        elif cmd == ".time": print(time.ctime())
+        elif cmd == ".calc": print(f"Result: {eval(args)}" if args else "Usage: .calc 2+2")
+        elif cmd == ".cowsay": os.system(f"cowsay '{args}'" if args else "cowsay 'Hello'")
+        elif cmd == ".joke": print("Why do coders like dark mode? Because light attracts bugs.")
+        elif cmd == ".ip": os.system("ifconfig")
         elif cmd == ".sys": os.system("uname -a")
         elif cmd == ".whoami": os.system("whoami")
         elif cmd == ".ls": os.system("ls")
         elif cmd == ".pwd": os.system("pwd")
-        elif cmd == ".banner": print("  Grubby is Online!  ")
-        elif cmd == ".slap": print("*slaps the terminal*")
-        elif cmd == ".joke": print("Why do programmers prefer dark mode? Because light attracts bugs.")
-        elif cmd == ".sleep": time.sleep(2); print("Woke up!")
-        elif cmd == ".count": print(*(range(1, 6)))
-        elif cmd == ".cowsay": os.system("cowsay 'Grubby is cool'")
-        elif cmd == ".sysinfo": os.system("df -h")
-        elif cmd == ".ip": os.system("ifconfig")
-        elif cmd == ".time": print(time.ctime())
-        elif cmd == ".color": print("\033[92m Green Mode Activated \033[0m")
-        elif cmd == ".love": print("Code is love, code is life.")
-        elif cmd == ".bye": print("See you later!"); sys.exit()
-        elif cmd == ".calc": print(f"Result: {2+2}")
-        elif cmd == ".hack": print("Accessing mainframe... Just kidding!")
-        elif cmd == ".dev": print("Made by a 10-year-old coder!")
-        elif cmd == ".wait": time.sleep(1); print("Done waiting.")
-        elif cmd == ".echo": print(input("Say what? "))
-        elif cmd == ".host": os.system("hostname")
-        elif cmd == ".id": os.system("id")
-        elif cmd == ".shell": os.system("/bin/bash")
-        elif cmd == ".os": print("OS: Termux / Android")
-        elif cmd == ".up": print("Uptime: It's running!")
-        elif cmd == ".random": import random; print(random.randint(1, 100))
-        elif cmd == ".start": print("Grubby engine started.")
+        elif cmd == ".slap": print("*slaps the screen*")
+        elif cmd == ".hack": print("Accessing mainframe... 0%... 50%... 100% Done!")
+        elif cmd == ".random": print(random.randint(1, 100))
         else: print(f"Unknown command: {cmd}")
 
 if __name__ == "__main__":
